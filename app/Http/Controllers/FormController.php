@@ -148,16 +148,17 @@ public function submit(Request $request, Form $form)
 
     $validated = $request->validate($rules);
 
-    // Create submission without 'answers' field since you save answers separately
-    $submission = $form->submissions()->create();
+    // ✅ Save IP in submission
+    $submission = $form->submissions()->create([
+        'ip_address' => $request->ip(),
+    ]);
 
     foreach ($form->fields as $field) {
         $input = $validated['field_' . $field->id] ?? null;
 
-        // Save array as JSON if needed
         if (is_array($input)) $input = json_encode($input);
 
-        $submission->answers()->create([
+        $submission->answerItems()->create([
             'field_id' => $field->id,
             'answer' => $input,
         ]);

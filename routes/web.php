@@ -30,4 +30,7 @@ Route::prefix('forms')->name('forms.')->group(function () {
     // Submissions routes
     Route::get('{form}/submissions', [SubmissionController::class, 'index'])->name('submissions');
     Route::get('{form}/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
+
+    
 });
+Route::get('/submissions', [SubmissionController::class, 'allSubmissions'])->name('submissions.all');

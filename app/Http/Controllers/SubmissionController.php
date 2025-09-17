@@ -20,4 +20,14 @@ class SubmissionController extends Controller
         $submission->load('answerItems.field');  // Load related answers & fields
         return view('form-builder.submission-detail', compact('form', 'submission'));
     }
+
+
+    
+
+public function allSubmissions()
+{
+    $submissions = Submission::with('form')->latest()->paginate(10);
+    return view('form-builder.all-submissions', compact('submissions'));
+}
+
 }

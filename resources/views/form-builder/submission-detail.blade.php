@@ -6,7 +6,9 @@
 <div class="container mt-5">
     <h1>Submission #{{ $submission->id }} for "{{ $form->name }}"</h1>
 
-    <ul class="list-group">
+    <p><strong>Submitted from IP:</strong> {{ $submission->ip_address ?? 'N/A' }}</p>
+
+    <ul class="list-group mt-3">
         @foreach($submission->answerItems as $answer)
             <li class="list-group-item">
                 <strong>{{ $answer->field->label }}:</strong>

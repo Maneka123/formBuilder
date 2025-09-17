@@ -17,6 +17,7 @@ return new class extends Migration
     $table->id();
     $table->foreignId('form_id')->constrained()->onDelete('cascade');
     $table->json('answers')->nullable();  // nullable, no default
+    $table->string('ip_address')->nullable(); // <- This line must exist
     $table->timestamps();
 });
 

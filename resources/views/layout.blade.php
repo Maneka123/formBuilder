@@ -44,6 +44,11 @@
             <li class="nav-item mb-2">
                 <a href="#" class="nav-link text-white">Settings</a>
             </li>
+
+            <li class="nav-item mb-2">
+    <a href="{{ route('submissions.all') }}" class="nav-link text-white">All Submissions</a>
+</li>
+
         </ul>
     </nav>
 

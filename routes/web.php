@@ -24,3 +24,8 @@ Route::view('/form-builder', 'form-builder')->name('form-builder');
 Route::view('/submissions', 'submissions')->name('submissions');
 Route::view('/preview', 'preview')->name('preview');
 Route::view('/settings', 'settings')->name('settings');
+use App\Http\Controllers\FormController;
+
+Route::get('/form-builder/create', [FormController::class, 'create'])->name('form-builder.create');
+Route::post('/form-builder', [FormController::class, 'store'])->name('form-builder.store');
+Route::get('/forms/{form}/preview', [FormController::class, 'preview'])->name('forms.preview');

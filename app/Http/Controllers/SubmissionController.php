@@ -8,11 +8,29 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class SubmissionController extends Controller
 {
     // List all submissions for a form
-    public function index(Form $form)
-    {
-        $submissions = $form->submissions()->latest()->paginate(10);
-        return view('form-builder.submissions', compact('form', 'submissions'));
+    
+
+        public function index(Request $request, Form $form)
+{
+    $query = $form->submissions()->latest();
+
+    if ($request->filled('start_date')) {
+        $query->whereDate('created_at', '>=', $request->input('start_date'));
     }
+
+    if ($request->filled('end_date')) {
+        $query->whereDate('created_at', '<=', $request->input('end_date'));
+    }
+
+    $submissions = $query->paginate(10)->appends($request->only(['start_date', 'end_date']));
+// Get total count of submissions for this form (with filters)
+    $totalCount = $query->count();
+
+    return view('form-builder.submissions', compact('form', 'submissions', 'totalCount'));
+    
+}
+
+        
 
     // Show one specific submission detail
     public function show(Form $form, Submission $submission)

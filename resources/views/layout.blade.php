@@ -25,23 +25,9 @@
                 <a href="{{ route('form-builder.create') }}" class="nav-link text-white">Create Form</a>
             </li>
 
-            <!-- Optional: Link to a preview of a form -->
-            <li class="nav-item mb-2">
-                @if(isset($form))
-                    <a href="{{ route('forms.preview', $form) }}" class="nav-link text-white">Preview</a>
-                @else
-                    <a href="#" class="nav-link text-white disabled">Preview</a>
-                @endif
-            </li>
+            
 
-            <!-- Submissions link: only show if $form is passed -->
-            <li class="nav-item mb-2">
-                @if(isset($form))
-                    <a href="{{ route('forms.submissions', $form) }}" class="nav-link text-white">Submissions</a>
-                @else
-                    <a href="#" class="nav-link text-white disabled">Submissions</a>
-                @endif
-            </li>
+            
 
             <!-- Optional: Settings link (can update if you create a route for it) -->
             <li class="nav-item mb-2">

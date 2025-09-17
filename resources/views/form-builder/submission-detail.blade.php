@@ -42,9 +42,9 @@
         </div>
 
         <div class="card-footer text-end">
-            <a href="{{ route('forms.submissions', $form) }}" class="btn btn-secondary">
-                <i class="bi bi-arrow-left-circle"></i> Back to Submissions
-            </a>
+            <a href="{{ route('submissions.all') }}" class="btn btn-secondary">
+    <i class="bi bi-arrow-left-circle"></i> Back to All Submissions
+</a>
 
             <a href="{{ route('forms.submissions.export', [$form, $submission]) }}" class="btn btn-success">
         <i class="bi bi-file-earmark-spreadsheet"></i> Export to CSV

@@ -38,3 +38,5 @@ Route::get('/submissions', [SubmissionController::class, 'allSubmissions'])->nam
 
 Route::get('forms/{form}/submissions/{submission}/export', [SubmissionController::class, 'exportToCsv'])
     ->name('forms.submissions.export');
+
+    Route::get('{form}/submissions', [SubmissionController::class, 'index'])->name('forms.submissions');

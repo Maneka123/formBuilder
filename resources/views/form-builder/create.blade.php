@@ -40,6 +40,9 @@
                 <ul class="list-group" id="fields-list" style="min-height: 200px;">
                     <li class="list-group-item text-muted">No fields added yet.</li>
                 </ul>
+
+                <!-- Your additional submit button -->
+    <button type="button" id="form-submit-preview" class="btn btn-success mt-3">Submit Form</button>
             </div>
         </div>
 

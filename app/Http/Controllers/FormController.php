@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\Field;
 use Illuminate\Http\Request;
-
+use App\Models\Submission;
+use App\Models\Answer;
+use Illuminate\Support\Facades\DB;
 class FormController extends Controller
 {
     public function create()
@@ -105,4 +107,72 @@ public function destroy(Form $form)
 
     return redirect()->route('forms.index')->with('success', 'Form deleted.');
 }
+
+
+// Show the form for submission
+    
+
+    
+    public function submissions(Form $form)
+{
+    $submissions = $form->submissions()->latest()->paginate(10);
+    return view('form-builder.submissions', compact('form', 'submissions'));
+}
+
+
+public function showSubmission(Form $form, Submission $submission)
+{
+    $submission->load('answers.field');
+    return view('form-builder.submission-detail', compact('form', 'submission'));
+}
+
+
+
+
+public function submit(Request $request, Form $form)
+{
+    $rules = [];
+
+    foreach ($form->fields as $field) {
+        $fieldKey = 'field_' . $field->id;
+
+        $rule = [];
+        if ($field->required) $rule[] = 'required';
+        else $rule[] = 'nullable';
+
+        if (in_array($field->type, ['text', 'textarea'])) $rule[] = 'string';
+        if (in_array($field->type, ['checkbox'])) $rule[] = 'array';
+
+        $rules[$fieldKey] = $rule;
+    }
+
+    $validated = $request->validate($rules);
+
+    // Create submission without 'answers' field since you save answers separately
+    $submission = $form->submissions()->create();
+
+    foreach ($form->fields as $field) {
+        $input = $validated['field_' . $field->id] ?? null;
+
+        // Save array as JSON if needed
+        if (is_array($input)) $input = json_encode($input);
+
+        $submission->answers()->create([
+            'field_id' => $field->id,
+            'answer' => $input,
+        ]);
+    }
+
+    return redirect()->route('forms.submissions.show', [$form, $submission])
+        ->with('success', 'Form submitted successfully!');
+}
+
+
+
+public function show(Form $form)
+{
+    $fields = $form->fields()->orderBy('order')->get();
+    return view('form-builder.submit', compact('form', 'fields'));
+}
+
 }

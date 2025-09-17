@@ -13,12 +13,13 @@
     <nav class="bg-dark text-white p-3" style="width: 220px;">
     <h2 class="mb-4">FormApp</h2>
     <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="{{ route('forms') }}" class="nav-link text-white">Forms</a></li>
-        <li class="nav-item mb-2"><a href="{{ route('form-builder') }}" class="nav-link text-white">Form Builder</a></li>
+        <li class="nav-item mb-2"><a href="{{ route('forms.index') }}" class="nav-link text-white">Forms</a>
+</li>
+        <li class="nav-item mb-2"><a href="{{ route('form-builder.create') }}" class="nav-link text-white">Form Builder</a></li>
         <li class="nav-item mb-2"><a href="{{ route('form-builder.create') }}" class="nav-link text-white">Create Form</a></li>
-        <li class="nav-item mb-2"><a href="{{ route('submissions') }}" class="nav-link text-white">Submissions</a></li>
-        <li class="nav-item mb-2"><a href="{{ route('preview') }}" class="nav-link text-white">Preview</a></li>
-        <li class="nav-item mb-2"><a href="{{ route('settings') }}" class="nav-link text-white">Settings</a></li>
+        <li class="nav-item mb-2"><a href="" class="nav-link text-white">Submissions</a></li>
+        <li class="nav-item mb-2"><a href="" class="nav-link text-white">Preview</a></li>
+        <li class="nav-item mb-2"><a href="" class="nav-link text-white">Settings</a></li>
     </ul>
 </nav>
 

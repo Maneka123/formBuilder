@@ -53,8 +53,20 @@ class FormController extends Controller
 public function edit(Form $form)
 {
     $fields = $form->fields()->orderBy('order')->get();
-    return view('form-builder.edit', compact('form', 'fields'));
+
+    // Prepare fields as array with decoded options
+    $fieldsArray = $fields->map(function($f) {
+        return [
+            'type' => $f->type,
+            'label' => $f->label,
+            'required' => (bool) $f->required,
+            'options' => $f->options ? json_decode($f->options) : null,
+        ];
+    })->toArray();
+
+    return view('form-builder.edit', compact('form', 'fieldsArray'));
 }
+
 
 public function update(Request $request, Form $form)
 {
@@ -65,12 +77,14 @@ public function update(Request $request, Form $form)
 
     $form->update(['name' => $request->name]);
 
-    $form->fields()->delete(); // Wipe old fields
-
     $fields = json_decode($request->fields, true);
 
+    // Delete existing fields and recreate
+    $form->fields()->delete();
+
     foreach ($fields as $index => $field) {
-        $form->fields()->create([
+        Field::create([
+            'form_id' => $form->id,
             'type' => $field['type'],
             'label' => $field['label'],
             'required' => $field['required'] ?? false,
@@ -79,7 +93,7 @@ public function update(Request $request, Form $form)
         ]);
     }
 
-    return redirect()->route('forms.index')->with('success', 'Form updated.');
+    return redirect()->route('forms.index')->with('success', 'Form updated successfully!');
 }
 
 public function destroy(Form $form)

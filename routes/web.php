@@ -19,13 +19,20 @@ Route::get('/', function () {
 
 Route::get('/', fn() => redirect('/forms'));
 
-Route::view('/forms', 'forms')->name('forms');
-Route::view('/form-builder', 'form-builder')->name('form-builder');
-Route::view('/submissions', 'submissions')->name('submissions');
-Route::view('/preview', 'preview')->name('preview');
-Route::view('/settings', 'settings')->name('settings');
 use App\Http\Controllers\FormController;
 
 Route::get('/form-builder/create', [FormController::class, 'create'])->name('form-builder.create');
 Route::post('/form-builder', [FormController::class, 'store'])->name('form-builder.store');
 Route::get('/forms/{form}/preview', [FormController::class, 'preview'])->name('forms.preview');
+
+
+
+Route::prefix('forms')->name('forms.')->group(function () {
+    Route::get('/', [FormController::class, 'index'])->name('index');
+    Route::get('/create', [FormController::class, 'create'])->name('create');
+    Route::post('/', [FormController::class, 'store'])->name('store');
+    Route::get('/{form}/edit', [FormController::class, 'edit'])->name('edit');
+    Route::put('/{form}', [FormController::class, 'update'])->name('update');
+    Route::delete('/{form}', [FormController::class, 'destroy'])->name('destroy');
+    Route::get('/{form}/preview', [FormController::class, 'preview'])->name('preview');
+});

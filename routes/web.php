@@ -34,3 +34,7 @@ Route::prefix('forms')->name('forms.')->group(function () {
     
 });
 Route::get('/submissions', [SubmissionController::class, 'allSubmissions'])->name('submissions.all');
+
+
+Route::get('forms/{form}/submissions/{submission}/export', [SubmissionController::class, 'exportToCsv'])
+    ->name('forms.submissions.export');

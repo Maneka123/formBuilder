@@ -21,7 +21,8 @@
                         <td>{{ $submission->id }}</td>
                         <td>{{ $submission->created_at->format('Y-m-d H:i') }}</td>
                         <td>
-                            <a href="{{ route('forms.submissions.show', [$form, $submission]) }}" class="btn btn-sm btn-primary">View</a>
+                            <a href="{{ route('forms.submissions.show', [$form, $submission]) }}" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i>
+View</a>
                         </td>
                     </tr>
                 @endforeach

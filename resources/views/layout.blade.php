@@ -5,11 +5,14 @@
     <title>Form Builder</title>
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="d-flex vh-100">
     <nav class="bg-dark text-white p-3" style="width: 220px;">
-        <h2 class="mb-4">FormApp</h2>
+        <h2 class="mb-4">FormBuilder</h2>
+        <h4>Manage Your Forms</h4>
         <ul class="nav flex-column">
 
             <!-- Link to all forms -->
